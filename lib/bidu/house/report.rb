@@ -3,6 +3,7 @@ module Bidu
     class Report
       include JsonParser
       require 'bidu/house/report/active_record'
+      require 'bidu/house/report/database'
       require 'bidu/house/report/error'
       require 'bidu/house/report/range'
       ALLOWED_PARAMETERS = []
@@ -12,7 +13,7 @@ module Bidu
 
       json_parse :id, case: :snake
 
-      def initialize(options)
+      def initialize(options = {})
         @json = DEFAULT_OPTION.merge(options)
       end
 
