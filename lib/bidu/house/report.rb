@@ -12,6 +12,7 @@ module Bidu
       attr_reader :json
 
       json_parse :id, case: :snake
+      json_parse :active, class: TimeRange
 
       def initialize(options = {})
         @json = default_option.merge(options)
@@ -27,6 +28,10 @@ module Bidu
 
       def as_json
         { status: status }
+      end
+
+      def enabled?
+        active.nil? || active.include?(Time.now)
       end
 
       private
